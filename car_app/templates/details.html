@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block css_add %}
+<style>
+.des {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.card-body {
+    /* box-shadow: 4px 8px 4px 8px rgba(0, 0, 0, 0.1);  */
+    background-color: #ffffff; 
+    color: rgb(0, 0, 0); 
+    text-align: left; 
+    padding: 40px; 
+    border-radius: 5px;
+}
+
+.card-title {
+    margin-bottom: 0; 
+}
+.car_image img{
+
+    border-radius: 5px;
+}.btn:hover{
+
+    background-color: rgb(31, 126, 43);
+}
+</style>
+{% endblock %}
+{% block main %}
+<section class="d-flex">
+    <div class="car_image col-lg-6 p-4">
+        <img src="{{ data.image.url }}" class="card-img-top" alt="Not found" />
+    </div>
+    <div class="des col-lg-6 p-4">
+        <div class="card-body">
+            <h2 class="card-title p-2">Car Name: {{ data.car_name }}</h2>
+            <h4 class="card-title p-2">Price: {{ data.price }}</h4>
+            <h4 class="card-title p-2">Brand: {{ data.brand.brand_name }}</h4>
+            <h4 class="card-title p-2"> Total Quantity: {{data.quantity }} </h4>
+
+            <h4 class="card-title p-2">Description : {{ data.des }} </h4>
+            <h4 class="card-title p-2">Country: {{ data.brand.country }}</h2><br>
+                {% if request.user.is_authenticated %}
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <a href="{% url 'buy' data.id %}" class="btn btn-lg btn-danger">Buy Now</a>  <br><br>
+              
+              </div>
+              {% endif%}
+        </div>
+    </div>
+</section>
+
+<!-- comment section  -->
+
+<div class="card m-2">
+    <h5 class="p-3">Total Comments : {{comments | length}}</h5>
+    {% for i in comments %}
+  <div class="card-body border m-2">
+        <p><b>{{i.name}}</b> {{i.show_date}}</p>
+        <p>{{i.comment_here}}</p>
+    </div>
+    {% endfor %}
+</div>
+    <div class="p-3">
+      <h1>Add Comment </h1>
+      <form  method="post">
+          {% csrf_token %}                 
+          {{comment_Form | crispy}}                  
+          <button  class="btn btn-success"  type="submit"> Submit </button>
+      </form>       
+      <br><br>
+   </div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+

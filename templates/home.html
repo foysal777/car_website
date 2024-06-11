@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_add %}
+<style>
+  .bg img {
+        height: 15rem;
+        transition: transform 0.3s ease-in-out; 
+    }
+
+    .bg img:hover {
+        transform: scale(1.2); 
+    }
+
+    .gutter{
+
+        background-color: rgb(182, 234, 243);
+        border-radius: 7px;
+    }
+    .gutter:hover{
+
+background-color: #ffffff;
+color: rgb(0, 0, 0);
+}
+
+.home{
+
+    background-color: rgb(171, 218, 245);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    color: rgb(0, 0, 0);
+}
+</style>
+{% endblock %}
+{% block main %}
+
+<section class=" home d-flex flex-wrap pb-4 ">
+    <div class="text col-sm-12 col-lg-6 p-4 fw-bold">
+        <h2 >~ New Arivall ~</h2>
+        <h1 class="text-danger">  Lamborghini Huracan ||  Black Car  </h1> 
+        <h4>Model ~ Car Supercar sl-14474 </h4>
+        <small>The Lamborghini available in Fortnite is the 2021 Huracán STO. It can be purchased periodically in the Fortnite store, or transferred from Rocket League  </small>
+        <br> <br>
+        <a href="#" class="btn btn-danger "> See Details.</a>
+    </div>
+    <div class="bg col-sm-12 col-lg-6">
+        <img src="{% static 'c3.png' %}" alt="Not found">
+    </div>
+</section>
+
+<h2 class="text-center mt-5  fw-bold text-info">Brand of all Cars </h2>
+
+<!-- slug filter  -->
+<section class="mt-5">
+
+    <div class="container">
+        <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+         {% for i in brand %}
+          <div class="col text-center">
+            <a href="{% url 'slug_name' i.slug %}" class="gutter p-3 border border-2 border-dark fw-bold d-block " style="text-decoration: none;">
+                {{ i.brand_name }}
+            </a>
+
+          </div>  
+          {% endfor %}
+        </div>
+      </div>
+
+</section> 
+
+<div class="text-center mt-4 fw-bold"> 
+    <small class="text-center text-danger" >  {{  data | length }} Cars are Available </small>
+</div>
+
+
+
+<section class="d-flex flex-wrap justify-content-center gap-3 mt-5">
+    {% for i in data %}
+    <div class="card col-sm-3" style="width: 18rem;">
+        <img src="{{ i.image.url }}" class="card-img-top" alt="Not found">
+        <div class="card-body">
+            <h5 class="card-title">Name : {{ i.car_name }}</h5>
+            <h5 class="card-title"> price : {{ i.price }}</h5>
+            <h5 class="card-title"> Brand :{{ i.brand.brand_name }}</h5>
+            <h5 class="card-title"> Country: {{ i.brand.country }}</h5> 
+            <a href="{% url 'details' i.id %}" class="btn btn-success">View Details</a>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+
+
+
+
+
+
+{% endblock %}

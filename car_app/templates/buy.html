@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_add %}
+<style>
+ 
+.home{
+
+    background-color: rgb(171, 218, 245);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    color: rgb(0, 0, 0);
+}
+</style>
+{% endblock %}
+{% block main %}
+ <h1 class="text-center fw-bold text-success p-5">Congratulations, You Buy this <br> {{data1.car_name}} Car </h1>
+
+
+<section class="d-flex flex-wrap justify-content-center gap-3 mt-5">
+  
+    <div class="card col-sm-3" style="width: 30rem;">
+        <img src="{{ data1.image.url }}" class="card-img-top" alt="Not found">
+        <div class="card-body">
+            <h5 class="card-title"> Car Name :{{ data1.car_name }}</h5>
+            <h5 class="card-title">Price : {{ data1.price }}</h5>
+            <h5 class="card-title"> Brand :{{ data1.brand.brand_name }}</h5>
+            <h5 class="card-title"> Country : {{ data1.brand.country }}</h5> 
+            <a href="#" class="btn btn-lg btn-danger">Already Booked</a>          
+            
+        </div>
+    </div>
+   
+ 
+</section>
+<br/><br/> <br><br>
+
+
+
+
+
+
+{% endblock %}
