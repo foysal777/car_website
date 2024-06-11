@@ -1,17 +1,32 @@
 from django.http import HttpRequest
 from django.http.response import HttpResponse as HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib import messages
-from django.views.generic import FormView
+from django.views.generic import FormView,UpdateView
 from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView,LogoutView
 from django.urls import reverse_lazy
 from .forms import RegisterForm
+from django.contrib.auth.models import User
+# from .models import 
 
 # Create your views here.
 
-# def home(request):
-#     return render(request,'home.html')
+
+def edit_profile(request):
+    
+        if request.method=='POST':
+            profile_form = RegisterForm(request.POST , instance = request.user )
+            if profile_form.is_valid():
+                profile_form.save()
+                messages.success(request, 'Profile update Successfully Completed')
+
+            return redirect('profile')
+        
+        else:
+         profile_form = RegisterForm( instance = request.user)  
+        return render(request, 'edit_profile.html' , {'form' : profile_form } )
+
 
 
 def profile(request):

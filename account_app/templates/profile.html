@@ -18,42 +18,12 @@
 {% block   main %}
 
  <h1 class="text-center p-5" >This is profile page</h1>
- {% comment %} <div class="text-center"> {% endcomment %}
-   
-{% comment %} 
-<div class="d-grid gap-2 col-6 mx-auto p-3">
-    <a href="{% url 'edit_profile' %}" class="btn btn-lg btn-success">Edit profile</a>
-    <a href="{% url 'pass_change' %}" class="btn btn-lg btn-warning" > Change PassWord </a>
+ <h1 class="text-center p-5" >The present user name is : {{user}} </h1>
 
-  </div></div>
- 
-  <div class="card_section d-flex justify-content-center gap-3 flex-wrap mt-5">
-    {% for post in data %}
-    <div
-      class="card border-success border-3 mb-3 col-sm-3"
-      style="max-width: 18rem">
-      <div class="card-header fw-bold text-light"
-        style="background-color: rgb(39, 91, 51)">{{post.title}}
-      </div>
-      <div class="card-body text-info">
-        <h5 class="card-title text-dark">{{post.content | truncatewords:20}}</h5>
-        <p class="text-primary fs-4">Author : {{post.authors.first_name}}</p>
-        <br />
-        <p class="text-dark fs-4">
-          Category : {% for cat in post.categorys.all %}
-  
-          <button class="btn btn-warning btn-sm g-2">{{cat.name}}</button>
-  
-          {% endfor %}
-        </p>
-        <a  href="{% url 'edit_post' post.id %}" class="btn btn-success">Edit Post</a>
-        <a  href="{% url 'delete_post' post.id %}" class="btn btn-danger">Delete</a>
-      </div>
-    </div>
-  
-    {% endfor %}
-  </div> {% endcomment %}
- 
+ <div class="text-center">  
+  <a  href="{% url 'edit_profile'  %}" class="btn btn-success class="  > Edit profile </a>
+
+</div>
 {% endblock  %}
 
 
